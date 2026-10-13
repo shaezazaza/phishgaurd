@@ -1,0 +1,346 @@
+{
+  "data": {
+    "train": {
+      "enron_ham": 11640,
+      "enron_mbox": 2860,
+      "nazario": 1233,
+      "phishing_pot": 3321
+    },
+    "test": {
+      "enron_ham": 2889,
+      "enron_mbox": 727,
+      "nazario": 335,
+      "phishing_pot": 831
+    }
+  },
+  "A_main_test": {
+    "logistic_regression": {
+      "precision": 0.9867,
+      "recall": 0.9563,
+      "f1": 0.9713,
+      "roc_auc": 0.9981,
+      "pr_auc": 0.9949,
+      "false_positive_rate": 0.0041,
+      "tp": 1115,
+      "fp": 15,
+      "tn": 3601,
+      "fn": 51,
+      "train_seconds": 44.4
+    },
+    "linear_svm": {
+      "precision": 0.9894,
+      "recall": 0.9623,
+      "f1": 0.9757,
+      "roc_auc": 0.9987,
+      "pr_auc": 0.9966,
+      "false_positive_rate": 0.0033,
+      "tp": 1122,
+      "fp": 12,
+      "tn": 3604,
+      "fn": 44,
+      "train_seconds": 43.0
+    },
+    "naive_bayes": {
+      "precision": 0.9614,
+      "recall": 0.9194,
+      "f1": 0.9399,
+      "roc_auc": 0.9952,
+      "pr_auc": 0.9868,
+      "false_positive_rate": 0.0119,
+      "tp": 1072,
+      "fp": 43,
+      "tn": 3573,
+      "fn": 94,
+      "train_seconds": 42.4
+    }
+  },
+  "A_per_source": {
+    "nazario": {
+      "n": 335,
+      "detected": 0.9881
+    },
+    "enron_mbox": {
+      "n": 727,
+      "correctly_passed": 0.9904
+    },
+    "phishing_pot": {
+      "n": 831,
+      "detected": 0.9434
+    },
+    "enron_ham": {
+      "n": 2889,
+      "correctly_passed": 0.9972
+    }
+  },
+  "B_era_shift": {
+    "trained_on": "Nazario 2005-07 + Enron only",
+    "tested_on": "4152 recent phishing_pot emails",
+    "detected": 0.2363,
+    "compare_model_trained_with_recent": {
+      "n": 831,
+      "detected": 0.9434
+    }
+  },
+  "C_spamassassin_legit": {
+    "n": 12,
+    "false_alarms": 3,
+    "scores": {
+      "001": 0.26,
+      "002": 0.643,
+      "005": 0.2,
+      "007": 0.19,
+      "008": 0.321,
+      "009": 0.321,
+      "010": 0.321,
+      "011": 0.732,
+      "012": 0.856,
+      "013": 0.251,
+      "014": 0.321,
+      "015": 0.321
+    }
+  },
+  "D_top_phishing_words": [
+    [
+      "your",
+      9.09
+    ],
+    [
+      "unsubscribe",
+      7.25
+    ],
+    [
+      "account",
+      6.95
+    ],
+    [
+      "de",
+      5.47
+    ],
+    [
+      "bank",
+      5.4
+    ],
+    [
+      "ebay",
+      4.92
+    ],
+    [
+      "cue_generic_greeting",
+      4.89
+    ],
+    [
+      "this email",
+      4.41
+    ],
+    [
+      "emails",
+      4.09
+    ],
+    [
+      "she",
+      4.09
+    ],
+    [
+      "your account",
+      4.03
+    ],
+    [
+      "important",
+      4.0
+    ],
+    [
+      "security",
+      3.94
+    ],
+    [
+      "wallet",
+      3.93
+    ],
+    [
+      "details",
+      3.74
+    ],
+    [
+      "email",
+      3.71
+    ],
+    [
+      "mrs",
+      3.7
+    ],
+    [
+      "hello",
+      3.48
+    ],
+    [
+      "kindly",
+      3.45
+    ],
+    [
+      "claim",
+      3.32
+    ],
+    [
+      "body",
+      3.29
+    ],
+    [
+      "annie",
+      3.25
+    ],
+    [
+      "now",
+      3.24
+    ],
+    [
+      "btc",
+      3.24
+    ],
+    [
+      "funds",
+      3.19
+    ],
+    [
+      "para",
+      3.19
+    ],
+    [
+      "dear",
+      3.18
+    ],
+    [
+      "payment",
+      3.14
+    ],
+    [
+      "secure",
+      3.13
+    ],
+    [
+      "chat",
+      3.02
+    ]
+  ],
+  "D_top_legit_words": [
+    [
+      "thanks",
+      -7.47
+    ],
+    [
+      "at",
+      -5.9
+    ],
+    [
+      "attached",
+      -5.84
+    ],
+    [
+      "will",
+      -5.64
+    ],
+    [
+      "gas",
+      -4.88
+    ],
+    [
+      "corp",
+      -4.8
+    ],
+    [
+      "call",
+      -4.71
+    ],
+    [
+      "for the",
+      -4.54
+    ],
+    [
+      "houston",
+      -4.48
+    ],
+    [
+      "energy",
+      -4.05
+    ],
+    [
+      "please",
+      -3.81
+    ],
+    [
+      "deal",
+      -3.69
+    ],
+    [
+      "on the",
+      -3.64
+    ],
+    [
+      "group",
+      -3.63
+    ],
+    [
+      "meeting",
+      -3.52
+    ],
+    [
+      "friday",
+      -3.51
+    ],
+    [
+      "week",
+      -3.41
+    ],
+    [
+      "power",
+      -3.35
+    ],
+    [
+      "november",
+      -3.31
+    ],
+    [
+      "john",
+      -3.3
+    ],
+    [
+      "fax",
+      -3.29
+    ],
+    [
+      "doc",
+      -3.27
+    ],
+    [
+      "me",
+      -3.23
+    ],
+    [
+      "mail",
+      -3.23
+    ],
+    [
+      "by",
+      -3.16
+    ],
+    [
+      "in the",
+      -3.12
+    ],
+    [
+      "mark",
+      -3.12
+    ],
+    [
+      "xls",
+      -3.07
+    ],
+    [
+      "employees",
+      -3.04
+    ],
+    [
+      "fyi",
+      -3.03
+    ]
+  ]
+}

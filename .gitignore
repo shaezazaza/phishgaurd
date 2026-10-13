@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+feeds/
+data/
+samples/
+*.eml
+models/transformer*/
