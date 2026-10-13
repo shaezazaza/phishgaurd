@@ -10,6 +10,7 @@ Keeping them out of the ML model stops that shortcut.
 """
 
 import re
+import socket
 from urllib.parse import urlparse
 
 from .emailparse import base_domain, domain_of
@@ -100,6 +101,17 @@ def _display_name(addr):
     return (m.group(1) if m else "").strip().lower()
 
 
+def _is_ip(host):
+    """Also catches hidden forms like 0xd3.0xfd.0xc9.0xc or 3232235777."""
+    if not re.fullmatch(r"[0-9a-fx.]+", host or "") or not re.search(r"\d", host):
+        return False
+    try:
+        socket.inet_aton(host)
+        return True
+    except OSError:
+        return False
+
+
 def link_signs(e):
     urls = e.get("urls", [])
     hosts = [h for h in (_host(u) for u in urls) if h]
@@ -117,7 +129,7 @@ def link_signs(e):
     return {
         "num_links": len(urls),
         "num_link_domains": len(link_bases),
-        "link_ip_address": int(any(re.fullmatch(r"[\d.]+", h) for h in hosts)),
+        "link_ip_address": int(any(_is_ip(h) for h in hosts)),
         "link_shortener": int(any(base_domain(h) in SHORTENERS or h in SHORTENERS for h in hosts)),
         "link_risky_tld": int(any(h.rsplit(".", 1)[-1] in RISKY_TLDS for h in hosts)),
         "link_punycode": int(any("xn--" in h for h in hosts)),

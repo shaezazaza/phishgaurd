@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "PhishGuard - Phishing Detector",
+  "short_name": "PhishGuard",
+  "version": "0.1.0",
+  "description": "Flags phishing and social-engineering emails in Gmail with an explainable risk score. Scoring runs on your computer.",
+  "icons": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
+  "action": {
+    "default_title": "PhishGuard",
+    "default_popup": "popup.html",
+    "default_icon": { "16": "icons/icon16.png", "32": "icons/icon32.png" }
+  },
+  "background": { "service_worker": "background.js" },
+  "permissions": ["storage", "contextMenus"],
+  "host_permissions": ["https://mail.google.com/*", "https://safebrowsing.googleapis.com/*"],
+  "content_scripts": [
+    { "matches": ["https://mail.google.com/*"], "js": ["ui.js", "content/gmail.js"], "run_at": "document_idle" }
+  ]
+}

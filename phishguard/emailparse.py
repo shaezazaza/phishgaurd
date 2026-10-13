@@ -31,8 +31,20 @@ def base_domain(host):
     return ".".join(parts[-2:])
 
 
+_ADDR_ANGLE = re.compile(r"<([^<>\s]+@[^<>\s]+)>")
+_ADDR_BARE = re.compile(r"[^\s<>\"',;:]+@[^\s<>\"',;:]+")
+
+
+def addr_of(address):
+    """'Name <a@b.com>' -> 'a@b.com'. Works on messy real-world From headers too
+    (e.g. '"Microsoft account team", _ <x@y.com>') where email.utils.parseaddr gives up."""
+    s = str(address or "")
+    m = _ADDR_ANGLE.search(s) or _ADDR_BARE.search(s)
+    return (m.group(1) if m.re is _ADDR_ANGLE else m.group(0)).strip() if m else ""
+
+
 def domain_of(address):
-    addr = parseaddr(address or "")[1]
+    addr = addr_of(address)
     return addr.split("@")[-1].lower() if "@" in addr else ""
 
 

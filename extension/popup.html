@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PhishGuard</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <img src="icons/icon32.png" alt="" width="20" height="20">
+    <h1>PhishGuard</h1>
+    <span id="status" class="status"></span>
+  </header>
+
+  <nav role="tablist">
+    <button role="tab" data-tab="email" aria-selected="true">This email</button>
+    <button role="tab" data-tab="text">Paste text</button>
+    <button role="tab" data-tab="source">Full email</button>
+  </nav>
+
+  <section id="tab-email" class="tab">
+    <div id="email-out" class="out"></div>
+  </section>
+
+  <section id="tab-text" class="tab" hidden>
+    <label>Sender (optional)<input id="t-from" placeholder="SBI Alerts &lt;alerts@example.com&gt;"></label>
+    <label>Subject<input id="t-subject" placeholder="Your account is blocked"></label>
+    <label>Message<textarea id="t-body" rows="6" placeholder="Paste the email or message text here"></textarea></label>
+    <button id="t-go" class="primary">Check</button>
+    <div id="text-out" class="out"></div>
+  </section>
+
+  <section id="tab-source" class="tab" hidden>
+    <p class="hint">In Gmail open the email → <b>⋮</b> → <b>Show original</b> → <b>Copy to clipboard</b>, then paste here.
+      This adds sender checks (SPF, DKIM, DMARC, reply-to, bounce address).</p>
+    <textarea id="s-raw" rows="7" placeholder="Received: from ...&#10;Authentication-Results: ...&#10;From: ...&#10;Subject: ..."></textarea>
+    <button id="s-go" class="primary">Check</button>
+    <div id="source-out" class="out"></div>
+  </section>
+
+  <details class="settings">
+    <summary>Settings</summary>
+    <label>Google Safe Browsing API key (optional)
+      <input id="gsb" type="password" placeholder="Leave empty to stay fully offline" autocomplete="off">
+    </label>
+    <p class="hint">With a key, link URLs (not the email text) are sent to Google to check. Without it, nothing leaves your computer.</p>
+    <button id="gsb-save">Save</button> <span id="gsb-msg" class="hint"></span>
+  </details>
+
+  <script src="core.js"></script>
+  <script src="mime.js"></script>
+  <script src="ui.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

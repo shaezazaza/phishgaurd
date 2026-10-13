@@ -32,6 +32,26 @@ python -m phishguard triage inbox_folder/ --csv queue.csv    # scan a folder, ge
 
 Optional online lookups. Set any of these environment variables to turn them on: `URLHAUS_KEY`, `GSB_KEY`, `VT_KEY`. Use `--offline` to skip online lookups.
 
+## Chrome extension (`extension/`)
+
+The same model and rules, ported to JavaScript. Everything runs inside your browser, and email text is never sent anywhere.
+
+- **Gmail banner:** each email you open gets a risk card above the message, with the score, tactics found and reasons.
+- **Popup → Paste text:** check any message (WhatsApp, SMS, Outlook web…).
+- **Popup → Full email:** in Gmail choose ⋮ → Show original → Copy, then paste here. This adds SPF / DKIM / DMARC, reply-to and bounce-address checks.
+- **Right-click → "Check selected text with PhishGuard"** on any web page.
+- **Blocklist:** 392k phishing domains are bundled. A Google Safe Browsing key is optional (Settings in the popup); with a key, only link URLs are sent to Google.
+
+**Install:** `chrome://extensions` → turn on **Developer mode** → **Load unpacked** → pick the `extension` folder. Then reload your Gmail tab.
+
+**After retraining:** run `python export_extension_model.py` and click the reload button on the extension card.
+
+**Tested:**
+- JS vs Python on 800 held-out emails: same level on all 800, risk within 1 point, text probability within 0.011.
+- The full-email parser matches Python on 76 real `.eml` files.
+- Loaded in Chromium against a mock Gmail page with no errors.
+- **Not yet tested on live Gmail.** Gmail's page structure can change. If banners don't appear, update the selectors at the top of `content/gmail.js`.
+
 ## Retrain from scratch
 
 ```bash

@@ -187,7 +187,8 @@ def update_feeds(feed_dir=FEED_DIR):
         try:
             data = urllib.request.urlopen(url, timeout=120).read()
             open(os.path.join(feed_dir, name), "wb").write(data)
-            print(f"updated {name}: {data.count(b'\n')} lines")
+            lines = data.count(b"\n")
+            print(f"updated {name}: {lines} lines")
         except Exception as ex:
             print(f"could not fetch {name}: {ex}")
 
